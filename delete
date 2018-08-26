@@ -1,0 +1,34 @@
+struct node *delete_beg(struct node *start)
+{
+struct node *ptr;
+ptr = start;
+start = start -> next;
+start -> prev = NULL;
+free(ptr);
+return start;
+}
+struct node *delete_end(struct node *start)
+{
+struct node *ptr;
+ptr = start;
+while(ptr -> next != NULL)
+ptr = ptr -> next;
+ptr -> prev -> next = NULL;
+free(ptr);
+return start;
+}
+struct node *delete_after(struct node *start)
+{
+struct node *ptr, *temp;
+int val;
+printf("\n Enter the value after which the node has to deleted : ");
+scanf("%d", &val);
+ptr = start;
+while(ptr -> data != val)
+ptr = ptr -> next;
+temp = ptr -> next;
+ptr -> next = temp -> next;
+temp -> next -> prev = ptr;
+free(temp);
+return start;
+}
